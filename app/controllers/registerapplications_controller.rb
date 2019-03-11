@@ -20,6 +20,7 @@ class RegisterapplicationsController < ApplicationController
 
   def show
     @registerapplication = Registerapplication.find(params[:id])
+    @events = @registerapplication.events.group_by(&:name)
   end
 
   def new
@@ -27,6 +28,20 @@ class RegisterapplicationsController < ApplicationController
   end
 
   def edit
+    @registerapplication = Registerapplication.find(params[:id])
+  end
+
+  def update
+    @registerapplication = Registerapplication.find(params[:id])
+    @registerapplication.assign_attributes(registerapplication_params)
+
+    if @registerapplication.save
+      flash[:notice] = "You have updated your application successfully."
+      redirect_to @registerapplication
+    else
+      flash.now[:alert] = "There was an error in updating your application. Please try again."
+      render :edit
+    end
   end
 
 
