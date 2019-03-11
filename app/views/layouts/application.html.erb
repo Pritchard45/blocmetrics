@@ -12,6 +12,9 @@
   <body>
     <%= render 'layouts/navbar' %>
     <%= render 'layouts/alerts' %>
+    <% if user_signed_in? %>
+         <li><%= link_to "My Apps", registerapplications_index_path %></li>
+    <% end %>
     <%= yield %>
   </body>
 </html>
