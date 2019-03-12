@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'registerapplications/new'
   devise_for :users
 
-  resources :registerapplications, only: [:show, :create, :edit, :index, :new, :destroy]
+  resources :registerapplications, only: [:show, :create, :edit, :index, :new, :update, :destroy]
 
   get 'about' => 'welcome#about'
 
