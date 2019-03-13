@@ -2,7 +2,7 @@ class RegisterapplicationsController < ApplicationController
 
 
   def index
-    @registerapplications = Registerapplication.all
+    @registerapplications = current_user.registerapplications
   end
 
   def create
@@ -19,7 +19,7 @@ class RegisterapplicationsController < ApplicationController
   end
 
   def show
-    @registerapplication = Registerapplication.find(params[:id])
+    @registerapplication = current_user.registerapplications.find(params[:id])
     @events = @registerapplication.events.group_by(&:name)
   end
 
@@ -28,11 +28,11 @@ class RegisterapplicationsController < ApplicationController
   end
 
   def edit
-    @registerapplication = Registerapplication.find(params[:id])
+    @registerapplication = current_user.registerapplications.find(params[:id])
   end
 
   def update
-    @registerapplication = Registerapplication.find(params[:id])
+    @registerapplication = current_user.registerapplications.find(params[:id])
     @registerapplication.assign_attributes(registerapplication_params)
 
     if @registerapplication.save
@@ -46,7 +46,7 @@ class RegisterapplicationsController < ApplicationController
 
 
   def destroy
-    @registerapplication = Registerapplication.find(params[:id])
+    @registerapplication = current_user.registerapplications.find(params[:id])
 
     if @registerapplication.destroy
       flash[:notice] = "\"#{@registerapplication.name}\" was deregistered successfully."
