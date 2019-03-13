@@ -1,5 +1,7 @@
 {
   "name": "blocmetrics",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "curl": "^0.1.4"
+  }
 }

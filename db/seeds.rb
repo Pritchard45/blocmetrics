@@ -25,7 +25,7 @@ registerapplications = Registerapplication.all
   )
 end
 
-60.times do
+5.times do
 	Event.create!(
 		name: Faker::Commerce.product_name,
 		registerapplication: registerapplications.sample
