@@ -1,7 +1,12 @@
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+
+
 <h1><%= @registerapplication.name %></h1>
   <div class="row">
     <div class="col-md-8">
       <h3>URL: <%= link_to @registerapplication.url, "#{@registerapplication.url}" %></h3><small> Registered by <%= @registerapplication.user.email %></small>
+      <%= pie_chart @registerapplication.events.group(:name).count %>
+      <%= line_chart @registerapplication.events.group_by_day(:created_at).count %>
       <p><%= @events.count %> events associated with this application</p>
       <p><%= @events%>
     </div>
