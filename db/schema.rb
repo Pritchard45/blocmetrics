@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2019_03_11_181304) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.integer "registerapplication_id"
+    t.bigint "registerapplication_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["registerapplication_id"], name: "index_events_on_registerapplication_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_181304) do
   create_table "registerapplications", force: :cascade do |t|
     t.string "name"
     t.string "url"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_registerapplications_on_user_id"
@@ -44,4 +47,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_181304) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "registerapplications"
+  add_foreign_key "registerapplications", "users"
 end
